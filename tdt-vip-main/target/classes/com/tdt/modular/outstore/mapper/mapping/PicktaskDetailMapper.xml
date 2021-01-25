@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.PicktaskDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.PicktaskDetail">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="stockid" property="stockid" />
+        <result column="stocklogid" property="stocklogid" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="locatorname" property="locatorname" />
+        <result column="qty" property="qty" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", stockid AS "stockid", stocklogid AS "stocklogid", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", locatorid AS "locatorid", locatorcode AS "locatorcode", locatorname AS "locatorname", qty AS "qty"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.PicktaskDetailResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_detail where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.PicktaskDetailResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_detail where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PicktaskDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_detail where 1 = 1
+    </select>
+
+</mapper>

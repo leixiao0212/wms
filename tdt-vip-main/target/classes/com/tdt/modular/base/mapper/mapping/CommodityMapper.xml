@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.base.mapper.CommodityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.base.entity.Commodity">
+        <id column="id" property="id" />
+        <result column="bar" property="bar" />
+        <result column="alias" property="alias" />
+        <result column="name" property="name" />
+        <result column="length" property="length" />
+        <result column="width" property="width" />
+        <result column="height" property="height" />
+        <result column="worth" property="worth" />
+        <result column="nweight" property="nweight" />
+        <result column="gweight" property="gweight" />
+        <result column="component" property="component" />
+        <result column="category" property="category" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="warehousename" property="warehousename" />
+        <result column="isunique" property="isunique" />
+        <result column="validday" property="validday" />
+        <result column="remarks" property="remarks" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="creatime" property="creatime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", bar AS "bar", alias AS "alias", name AS "name", length AS "length", width AS "width", height AS "height", worth AS "worth", nweight AS "nweight", gweight AS "gweight", component AS "component", category AS "category", warehouseid AS "warehouseid", warehousename AS "warehousename", isunique AS "isunique", validday AS "validday", remarks AS "remarks", createid AS "createid", creator AS "creator", creatime AS "creatime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.base.model.result.CommodityResult" parameterType="com.tdt.modular.base.model.params.CommodityParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_commodity where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from b_commodity where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="paramCondition.bar != null and paramCondition.bar != ''">
+            and bar like CONCAT ('%',#{paramCondition.bar},'%')
+        </if>
+        <if test="paramCondition.name != null and paramCondition.name != ''">
+            and name like CONCAT ('%',#{paramCondition.name},'%')
+        </if>
+        <if test="paramCondition.alias != null and paramCondition.alias != ''">
+            and alias like CONCAT ('%',#{paramCondition.alias},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.base.model.result.CommodityResult" parameterType="com.tdt.modular.base.model.params.CommodityParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_commodity where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.base.model.params.CommodityParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_commodity where 1 = 1
+        <if test="paramCondition.bar != null and paramCondition.bar != ''">
+            and bar like CONCAT ('%',#{paramCondition.bar},'%')
+        </if>
+        <if test="paramCondition.name != null and paramCondition.name != ''">
+            and name like CONCAT ('%',#{paramCondition.name},'%')
+        </if>
+        <if test="paramCondition.alias != null and paramCondition.alias != ''">
+            and alias like CONCAT ('%',#{paramCondition.alias},'%')
+        </if>
+    </select>
+
+    <select id="queryByBar" resultType="com.tdt.modular.base.entity.Commodity">
+        select * from b_commodity where bar = #{bar}
+    </select>
+</mapper>

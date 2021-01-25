@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tdt-base-support/tdt-base/tdt-base.iml" filepath="$PROJECT_DIR$/tdt-base-support/tdt-base/tdt-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdt-base-support/tdt-base-support.iml" filepath="$PROJECT_DIR$/tdt-base-support/tdt-base-support.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdt-base-support/tdt-sys/tdt-sys.iml" filepath="$PROJECT_DIR$/tdt-base-support/tdt-sys/tdt-sys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdt-vip.iml" filepath="$PROJECT_DIR$/tdt-vip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tdt-vip-main/tdt-vip-main.iml" filepath="$PROJECT_DIR$/tdt-vip-main/tdt-vip-main.iml" />
+    </modules>
+  </component>
+</project>

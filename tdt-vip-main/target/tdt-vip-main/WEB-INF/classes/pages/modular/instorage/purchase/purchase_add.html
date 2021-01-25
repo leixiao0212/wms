@@ -1,0 +1,58 @@
+@layout("/common/_form.html",{js:["/assets/modular/instorage/purchase/purchase_add.js"]}){
+
+<form class="layui-form" id="purchaseForm" lay-filter="purchaseForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">添加采购订单信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">采购订单编号<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="purchaseno" name="purchaseno" value="${purchaseno!}" placeholder="请输入采购订单编号" type="text" class="layui-input" />
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">供应商名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select id="supplierid" name="supplierid">
+                                @for(supplier in suppliers!){
+                                <option value="${supplier.id!}">${supplier.name!}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>
+                    <!--<div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">仓库名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select id="warehouseid" name="warehouseid">
+                                @for(warehouse in warehouses!){
+                                <option value="${warehouse.id!}">${warehouse.name!}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>-->
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label"style="width: 100px">预计到货时间<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="estimatearrivaltime" name="estimatearrivaltime" placeholder="请输入预计到货时间" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label"style="width: 100px">备注</label>
+                        <div class="layui-input-inline">
+                            <input id="remark" name="remark" placeholder="请输入备注" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit><i class="layui-icon">&#xe605;</i>录入订单明细</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog"><i class="layui-icon">&#x1006;</i>取消</button>
+    </div>
+</form>
+@}

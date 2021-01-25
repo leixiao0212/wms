@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.PickMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.Pick">
+        <id column="id" property="id" />
+        <result column="pickno" property="pickno" />
+        <result column="picktaskid" property="picktaskid" />
+        <result column="picktaskno" property="picktaskno" />
+        <result column="state" property="state" />
+        <result column="remarks" property="remarks" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pickno AS "pickno", picktaskid AS "picktaskid", picktaskno AS "picktaskno", state AS "state", remarks AS "remarks", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.PickResult" parameterType="com.tdt.modular.outstore.model.params.PickParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_pick where 1 = 1
+            <if test="paramCondition.pickno != null and paramCondition.pickno != ''">
+                and pickno like CONCAT('%',#{paramCondition.pickno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+            <if test="paramCondition.state != null and paramCondition.state != ''">
+                and state like CONCAT('%',#{paramCondition.state},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PickParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_pick where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+            <if test="paramCondition.pickno != null and paramCondition.pickno != ''">
+                and pickno like CONCAT('%',#{paramCondition.pickno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+            <if test="paramCondition.state != null and paramCondition.state != ''">
+                and state = #{paramCondition.state}
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.PickResult" parameterType="com.tdt.modular.outstore.model.params.PickParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_pick where 1 = 1
+            <if test="paramCondition.pickno != null and paramCondition.pickno != ''">
+                and pickno like CONCAT('%',#{paramCondition.pickno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+            <if test="paramCondition.state != null and paramCondition.state != ''">
+                and state like CONCAT('%',#{paramCondition.state},'%')
+            </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PickParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_pick where 1 = 1
+            <if test="paramCondition.pickno != null and paramCondition.pickno != ''">
+                and pickno like CONCAT('%',#{paramCondition.pickno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+            <if test="paramCondition.state != null and paramCondition.state != ''">
+                and state like CONCAT('%',#{paramCondition.state},'%')
+            </if>
+    </select>
+
+</mapper>

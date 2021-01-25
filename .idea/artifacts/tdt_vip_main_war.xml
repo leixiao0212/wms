@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tdt-vip-main:war">
+    <output-path>$PROJECT_DIR$/tdt-vip-main/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>tdt-vip-main</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="tdt-vip-main.war">
+      <element id="artifact" artifact-name="tdt-vip-main:war exploded" />
+    </root>
+  </artifact>
+</component>

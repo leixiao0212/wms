@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.PicktaskOutorderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.PicktaskOutorder">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="outorderid" property="outorderid" />
+        <result column="outorderno" property="outorderno" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", outorderid AS "outorderid", outorderno AS "outorderno"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.PicktaskOutorderResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskOutorderParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_outorder where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_outorder where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.PicktaskOutorderResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskOutorderParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_outorder where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PicktaskOutorderParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_outorder where 1 = 1
+    </select>
+
+</mapper>

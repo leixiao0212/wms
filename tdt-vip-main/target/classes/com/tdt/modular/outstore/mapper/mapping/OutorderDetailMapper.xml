@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.OutorderDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.OutorderDetail">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="stocklogid" property="stocklogid" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="qty" property="qty" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", stocklogid AS "stocklogid", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", qty AS "qty", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.OutorderDetailResult" parameterType="com.tdt.modular.outstore.model.params.OutorderDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.OutorderDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.OutorderDetailResult" parameterType="com.tdt.modular.outstore.model.params.OutorderDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.OutorderDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="countCategory" resultType="int">
+        SELECT COUNT(*) FROM o_outorder_detail WHERE pid = #{id}
+    </select>
+
+    <select id="noenough" resultType="long">
+        select a.commodityid from
+        (SELECT commodityid,SUM(qty) AS sqty FROM o_outorder_detail WHERE pid in
+        <foreach collection="array" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+         GROUP BY commodityid) a
+        join
+        (SELECT commodityid,SUM(uqty) as uqty FROM b_stock a JOIN b_locator b ON a.locatorid = b.id WHERE b.type = "1" GROUP BY commodityid) b
+        on a.commodityid=b.commodityid
+        where a.sqty>b.uqty
+    </select>
+    <select id="countCommodityQty" resultType="map">
+        SELECT commodityid,commoditybar,commodityname,SUM(qty) AS sqty FROM o_outorder_detail WHERE pid IN
+        <foreach collection="array" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        GROUP BY commodityid,commoditybar,commodityname
+    </select>
+    <select id="selectListByCommodityIdAndOutorderId" resultType="com.tdt.modular.outstore.entity.OutorderDetail">
+        SELECT * FROM o_outorder_detail WHERE commodityid = #{commodityId} AND pid IN
+        <foreach collection="array" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

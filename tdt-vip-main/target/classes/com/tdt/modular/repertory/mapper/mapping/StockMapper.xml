@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.repertory.mapper.StockMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.repertory.entity.Stock">
+        <id column="id" property="id" />
+        <result column="billno" property="billno" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorname" property="locatorname" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="cqty" property="cqty" />
+        <result column="uqty" property="uqty" />
+        <result column="lqty" property="lqty" />
+        <result column="locatorstate" property="locatorstate" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="remarks" property="remarks" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", billno AS "billno", locatorid AS "locatorid", locatorname AS "locatorname", locatorcode AS "locatorcode", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", cqty AS "cqty", uqty AS "uqty", lqty AS "lqty", locatorstate AS "locatorstate", warehouseid AS "warehouseid", remarks AS "remarks", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.repertory.model.result.StockResult" parameterType="com.tdt.modular.repertory.model.params.StockParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_stock where 1 = 1
+            <if test="paramCondition.commoditybar != null and paramCondition.commoditybar != ''">
+                and commoditybar like CONCAT('%',#{paramCondition.commoditybar},'%')
+            </if>
+            <if test="paramCondition.commodityname != null and paramCondition.commodityname != ''">
+                and commodityname like CONCAT('%',#{paramCondition.commodityname},'%')
+            </if>
+            <if test="paramCondition.locatorcode != null and paramCondition.locatorcode != ''">
+                and locatorcode like CONCAT('%',#{paramCondition.locatorcode},'%')
+            </if>
+            <if test="paramCondition.locatorname != null and paramCondition.locatorname != ''">
+                and locatorname like CONCAT('%',#{paramCondition.locatorname},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.repertory.model.params.StockParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_stock where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+            <if test="paramCondition.commoditybar != null and paramCondition.commoditybar != ''">
+                and commoditybar like CONCAT('%',#{paramCondition.commoditybar},'%')
+            </if>
+            <if test="paramCondition.commodityname != null and paramCondition.commodityname != ''">
+                and commodityname like CONCAT('%',#{paramCondition.commodityname},'%')
+            </if>
+            <if test="paramCondition.locatorcode != null and paramCondition.locatorcode != ''">
+                and locatorcode like CONCAT('%',#{paramCondition.locatorcode},'%')
+            </if>
+            <if test="paramCondition.locatorname != null and paramCondition.locatorname != ''">
+                and locatorname like CONCAT('%',#{paramCondition.locatorname},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.repertory.model.result.StockResult" parameterType="com.tdt.modular.repertory.model.params.StockParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_stock where 1 = 1
+            <if test="paramCondition.commoditybar != null and paramCondition.commoditybar != ''">
+                and commoditybar like CONCAT('%',#{paramCondition.commoditybar},'%')
+            </if>
+            <if test="paramCondition.commodityname != null and paramCondition.commodityname != ''">
+                and commodityname like CONCAT('%',#{paramCondition.commodityname},'%')
+            </if>
+            <if test="paramCondition.locatorcode != null and paramCondition.locatorcode != ''">
+                and locatorcode like CONCAT('%',#{paramCondition.locatorcode},'%')
+            </if>
+            <if test="paramCondition.locatorname != null and paramCondition.locatorname != ''">
+                and locatorname like CONCAT('%',#{paramCondition.locatorname},'%')
+            </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.repertory.model.params.StockParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_stock where 1 = 1
+            <if test="paramCondition.commoditybar != null and paramCondition.commoditybar != ''">
+                and commoditybar like CONCAT('%',#{paramCondition.commoditybar},'%')
+            </if>
+            <if test="paramCondition.commodityname != null and paramCondition.commodityname != ''">
+                and commodityname like CONCAT('%',#{paramCondition.commodityname},'%')
+            </if>
+            <if test="paramCondition.locatorcode != null and paramCondition.locatorcode != ''">
+                and locatorcode like CONCAT('%',#{paramCondition.locatorcode},'%')
+            </if>
+            <if test="paramCondition.locatorname != null and paramCondition.locatorname != ''">
+                and locatorname like CONCAT('%',#{paramCondition.locatorname},'%')
+            </if>
+    </select>
+
+    <select id="queryCommonLocatorStock" resultType="com.tdt.modular.repertory.entity.Stock">
+       SELECT a.* FROM b_stock a JOIN b_locator b ON a.locatorid = b.id WHERE a.commodityid = #{commodityId} And b.type = "1"
+    </select>
+</mapper>

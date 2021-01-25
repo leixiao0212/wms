@@ -1,0 +1,27 @@
+@layout("/common/_form.html",{js:["/assets/modular/instorage/receive/receive_add.js"]}){
+
+<form class="layui-form" id="receiveForm" lay-filter="receiveForm" style="height:710px">
+    <div class="layui-fluid">
+        <div class="layui-card" style="height:710px">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body" style="margin-top: 200px">
+                <input type="hidden" id="id" name="id" value="">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <label class="layui-form-label" style="width: 210px;margin-left: 40px">采购订单编号/接货单号/调拨单号<span style="color: red;">*</span></label>
+                    <div class="layui-input-inline" style="width: 250px;">
+                        <input id="purchaseno" name="purchaseno" placeholder="请输入编号" type="text" class="layui-input" lay-verify="required" required />
+                    </div>
+                </div>
+                <div class="layui-form-item text-center">
+                    <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>开始接货</button>
+                    <button id="btnClean" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i>清除</button>
+                    <button id="btnReceive" class="layui-btn layui-btn-warm"><i class="layui-icon">&#xe605;</i>无单接货</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@}

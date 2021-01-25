@@ -1,0 +1,43 @@
+@layout("/common/_form.html",{js:["/assets/modular/outstore/wellen/wellen.js"]}){
+
+<form class="layui-form" id="wellenForm" lay-filter="wellenForm" style="height:710px">
+    <div class="layui-fluid">
+        <div class="layui-card" style="height:710px">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body" style="margin-top: 160px">
+                <div class="layui-form-item" pane="" style="text-align:center">
+                    <label class="">波次种类</label>
+                    <div class="layui-input-block" style="margin-left: 0">
+                        <input type="checkbox" name="oneAndOne" lay-skin="primary" title="单品单件" value="oneAndOne">
+                        <input type="checkbox" name="oneAndAny" lay-skin="primary" title="单品多件" value="oneAndAny">
+                        <input type="checkbox" name="AnyAndOne" lay-skin="primary" title="多品单件" value="anyAndOne">
+                        <input type="checkbox" name="AnyAndAny" lay-skin="primary" title="多品多件" value="anyAndAny">
+                        <input type="checkbox" name="province" lay-skin="primary" title="省" value="province">
+                        <input type="checkbox" name="city" lay-skin="primary" title="市" value="city">
+                        <input type="checkbox" name="county" lay-skin="primary" title="区" value="county">
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md4">&nbsp;</div>
+                    <div class="layui-col-md4">
+                        <div class="layui-row">
+                            <div class="layui-col-md3">&nbsp;</div>
+                            <div class="layui-col-md6">
+                                <input type="text" id="qty" name="qty" placeholder="请输入生成波次的出库订单数量" class="layui-input" required>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">&nbsp;</div>
+                </div>
+                <div class="layui-form-item text-center">
+                    <button class="layui-btn icon-btn" lay-submit lay-filter="*"><i class="layui-icon">&#xe654;</i>形成波次</button>
+                    <button id="btnClean" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i>重置</button>
+                    <button id="btnIncrease" class="layui-btn"><i class="layui-icon">&#xe640;</i>生成出库订单标签</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@}

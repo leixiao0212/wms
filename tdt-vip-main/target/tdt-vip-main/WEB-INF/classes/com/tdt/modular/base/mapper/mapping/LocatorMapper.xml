@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.base.mapper.LocatorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.base.entity.Locator">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="length" property="length" />
+        <result column="width" property="width" />
+        <result column="height" property="height" />
+        <result column="weight" property="weight" />
+        <result column="type" property="type" />
+        <result column="state" property="state" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", name AS "name", code AS "code", length AS "length", width AS "width", height AS "height", weight AS "weight", type AS "type", state AS "state", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.base.model.result.LocatorResult" parameterType="com.tdt.modular.base.model.params.LocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_locator where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from b_locator where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="paramCondition.name != null and paramCondition.name != ''">
+            and name like CONCAT ('%',#{paramCondition.name},'%')
+        </if>
+        <if test="paramCondition.code != null and paramCondition.code != ''">
+            and code like CONCAT ('%',#{paramCondition.code},'%')
+        </if>
+        <if test="paramCondition.type != null and paramCondition.type != ''">
+            and type = #{type}
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.base.model.result.LocatorResult" parameterType="com.tdt.modular.base.model.params.LocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_locator where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.base.model.params.LocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from b_locator where 1 = 1
+        <if test="paramCondition.name != null and paramCondition.name != ''">
+            and name like CONCAT ('%',#{paramCondition.name},'%')
+        </if>
+        <if test="paramCondition.code != null and paramCondition.code != ''">
+            and code like CONCAT ('%',#{paramCondition.code},'%')
+        </if>
+        <if test="paramCondition.type != null and paramCondition.type != ''">
+            and type like CONCAT ('%',#{paramCondition.type},'%')
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,51 @@
+@layout("/common/_container.html",{js:["/assets/modular/outstore/pick/pick.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar" lay-filter="test">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="pickno" class="layui-input" type="text" placeholder="拣货单号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="picktaskno" class="layui-input" type="text" placeholder="拣货任务单号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="state" name="state">
+                                    <option value="">拣货状态</option>
+                                    @for(dict in dicts!){
+                                    <option value="${dict.code!}">${dict.name!}</option>
+                                    @}
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnReset" class="layui-btn icon-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="pickTable" lay-filter="pickTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    {{#  if(d.state == "2"||d.state == "3"){  }}
+    @if(shiro.hasPermission("/pick/restore")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="restore">还原</a>
+    @}
+    <a class="layui-btn layui-btn-xs" lay-event="checkDetail">查看明细</a>
+    {{#  } else {  }}
+    <a class="layui-btn layui-btn-xs" lay-event="addDetail">录入明细</a>
+    {{#  }  }}
+</script>
+@}

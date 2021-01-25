@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.PicktaskLockDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.PicktaskLockDetail">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="picktaskno" property="picktaskno" />
+        <result column="outorderid" property="outorderid" />
+        <result column="outorderno" property="outorderno" />
+        <result column="outorderdetailid" property="outorderdetailid" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="locatorname" property="locatorname" />
+        <result column="qty" property="qty" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", picktaskno AS "picktaskno", outorderid AS "outorderid", outorderno AS "outorderno", outorderdetailid AS "outorderdetailid", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", locatorid AS "locatorid", locatorcode AS "locatorcode", locatorname AS "locatorname", qty AS "qty"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.PicktaskLockDetailResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskLockDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_lock_detail where 1 = 1
+            <if test="paramCondition.outorderno != null and paramCondition.outorderno != ''">
+                and outorderno like CONCAT('%',#{paramCondition.outorderno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PicktaskLockDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_lock_detail where 1 = 1
+            <if test="paramCondition.outorderno != null and paramCondition.outorderno != ''">
+                and outorderno like CONCAT('%',#{paramCondition.outorderno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.PicktaskLockDetailResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskLockDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_lock_detail where 1 = 1
+            <if test="paramCondition.outorderno != null and paramCondition.outorderno != ''">
+                and outorderno like CONCAT('%',#{paramCondition.outorderno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PicktaskLockDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask_lock_detail where 1 = 1
+            <if test="paramCondition.outorderno != null and paramCondition.outorderno != ''">
+                and outorderno like CONCAT('%',#{paramCondition.outorderno},'%')
+            </if>
+            <if test="paramCondition.picktaskno != null and paramCondition.picktaskno != ''">
+                and picktaskno like CONCAT('%',#{paramCondition.picktaskno},'%')
+            </if>
+    </select>
+
+    <select id="countQty" resultType="int">
+        SELECT IFNULL((SELECT SUM(qty) AS qtySum FROM o_picktask_lock_detail WHERE outorderdetailid = #{outorderdetailid} GROUP BY outorderdetailid),0)
+    </select>
+
+    <select id="countCommodityQty" resultType="map">
+        SELECT commodityid,locatorid,SUM(qty) FROM o_picktask_lock_detail WHERE picktaskno = #{picktaskno} GROUP BY commodityid,locatorid
+    </select>
+    <update id="updateoutorderno">
+        update o_picktask_lock_detail a set outorderno=(select outorderno from o_outorder where id=a.outorderid) where outorderno is null
+    </update>
+
+</mapper>

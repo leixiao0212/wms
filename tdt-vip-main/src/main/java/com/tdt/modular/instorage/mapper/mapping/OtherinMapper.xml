@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.instorage.mapper.OtherinMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.instorage.entity.Otherin">
+        <id column="id" property="id" />
+        <result column="otherinno" property="otherinno" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="locatorname" property="locatorname" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="qty" property="qty" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+        <result column="auditid" property="auditid" />
+        <result column="auditor" property="auditor" />
+        <result column="audittime" property="audittime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", otherinno AS "otherinno", locatorid AS "locatorid", locatorcode AS "locatorcode", locatorname AS "locatorname", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", qty AS "qty", state AS "state", remark AS "remark", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime", auditid AS "auditid", auditor AS "auditor", audittime AS "audittime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.instorage.model.result.OtherinResult" parameterType="com.tdt.modular.instorage.model.params.OtherinParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_otherin where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from i_otherin where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="paramCondition.otherinno != null and paramCondition.otherinno != ''">
+            and otherinno like CONCAT ('%',#{paramCondition.otherinno},'%')
+        </if>
+        <if test="paramCondition.state != null and paramCondition.state != ''">
+            and state = #{state}
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.instorage.model.result.OtherinResult" parameterType="com.tdt.modular.instorage.model.params.OtherinParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_otherin where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.instorage.model.params.OtherinParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_otherin where 1 = 1
+    </select>
+
+</mapper>

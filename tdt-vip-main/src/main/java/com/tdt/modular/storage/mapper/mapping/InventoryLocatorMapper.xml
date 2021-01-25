@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.storage.mapper.InventoryLocatorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.storage.entity.InventoryLocator">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="inventoryno" property="inventoryno" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="locatorname" property="locatorname" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", inventoryno AS "inventoryno", locatorid AS "locatorid", locatorcode AS "locatorcode", locatorname AS "locatorname", createid AS "createid", creator AS "creator", createtime AS "createtime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.storage.model.result.InventoryLocatorResult" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        SELECT * FROM s_inventory a LEFT JOIN
+        (select pid,GROUP_CONCAT(locatorcode) AS locatorcodes from
+        s_inventory_locator group by pid) b on a.id=b.pid where 1=1
+        <if test="paramCondition.inventoryno != null and paramCondition.inventoryno != ''">
+            and a.inventoryno like CONCAT('%',#{paramCondition.inventoryno},'%')
+        </if>
+        <if test="paramCondition.locatorcode != null and paramCondition.locatorcode != ''">
+            and locatorcode like CONCAT('%',#{paramCondition.locatorcode},'%')
+        </if>
+            and a.warehouseid = #{warehouseid} order by a.createtime desc
+    </select>
+
+    <select id="detailList" resultType="map">
+        select a.*,b.commoditybar,b.commodityname,b.qty from s_inventory_locator a
+        join s_inventory_locator_detail b on a.id = b.pid where a.pid = #{paramCondition.pid} order by a.createtime desc
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.storage.model.result.InventoryLocatorResult" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="inventoryDetailLists" resultType="java.util.Map">
+        select a.*,b.commoditybar,b.commodityname,b.qty from s_inventory_locator a
+        join s_inventory_locator_detail b on a.id = b.pid
+        where a.pid = #{paramCondition.pid} order by a.createtime desc
+    </select>
+
+</mapper>

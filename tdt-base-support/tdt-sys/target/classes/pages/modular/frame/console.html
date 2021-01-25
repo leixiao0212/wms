@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>${constants.getSystemName()}</title>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/libs/layui/css/layui.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/common/module/admin.css?v=${constants.getReleaseVersion()}"/>
+    <link rel="stylesheet" href="${ctxPath}/assets/expand/css/style.css?v=${constants.getReleaseVersion()}" media="all"/>
+
+    <style>
+        /** 卡片轮播图样式 */
+        .admin-carousel .layui-carousel-ind {
+            position: absolute;
+            top: -41px;
+            text-align: right;
+        }
+
+        .admin-carousel .layui-carousel-ind ul {
+            background: 0 0;
+        }
+
+        .admin-carousel .layui-carousel-ind li {
+            background-color: #e2e2e2;
+        }
+
+        .admin-carousel .layui-carousel-ind li.layui-this {
+            background-color: #999;
+        }
+
+        /** 广告位轮播图 */
+        .admin-news .layui-carousel-ind {
+            height: 45px;
+        }
+
+        .admin-news a {
+            display: block;
+            line-height: 60px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- 加载动画，移除位置在common.js中 -->
+<div class="page-loading">
+    <div class="ball-loader">
+        <span></span><span></span><span></span><span></span>
+    </div>
+</div>
+
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    访问量(来自码云)<span class="layui-badge layui-bg-black pull-right">月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font">12,500</p>
+                    <p>总计访问量<span class="pull-right">32万+ <i class="layui-icon layui-icon-flag"></i></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    下载量(来自码云)<span class="layui-badge layui-bg-black pull-right">月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font">2,400</p>
+                    <p>总下载<span class="pull-right">5万+ <i class="layui-icon layui-icon-note"></i></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    GIT PULL(来自码云)<span class="layui-badge layui-bg-black pull-right">月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font">1,500</p>
+                    <p>总PULL数<span class="pull-right">5万+ <i class="layui-icon layui-icon-notice"></i></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs12 layui-col-sm6 layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    GIT PUSH(来自码云)<span class="layui-badge layui-bg-black pull-right">月</span>
+                </div>
+                <div class="layui-card-body">
+                    <p class="lay-big-font">100</p>
+                    <p>总PUSH数<span class="pull-right">1066 <i class="layui-icon layui-icon-diamond"></i></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-lg8 layui-col-md7">
+            <div class="layui-card">
+                <div class="layui-card-header">更新日志</div>
+                <div class="layui-card-body">
+                    <ul class="layui-timeline">
+                        <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">
+                                    正式版 V1.0
+                                    <small>更符合企业级仓储管理系统</small>&emsp;
+                                    <span class="layui-badge-rim">2020-3-1</span>
+                                </h3>
+                                <ul>
+                                    <li class="text-danger">新增基于spring cloud alibaba的全新微服务版本</li>
+                                    <li class="text-danger">新增多仓库系统，采用逻辑隔离的方式</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-lg4 layui-col-md5">
+            <div class="layui-card">
+                <div class="layui-card-header">项目介绍</div>
+                <div class="layui-card-body">
+                    <table class="layui-table layui-text">
+                        <colgroup>
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>项目名称</td>
+                            <td>仓储管理系统</td>
+                        </tr>
+                        <tr>
+                            <td>开源版本</td>
+                            <td>正式版 V1.0</td>
+                        </tr>
+                        <tr>
+                            <td>官方地址</td>
+                            <td><a href="https://www.thedreamtree.cn/" target="_blank">https://www.thedreamtree.cn</a></td>
+                        </tr>
+                        <tr>
+                            <td>gitee地址</td>
+                            <td><a href="https://gitee.com/thedreamtree/wms" target="_blank">https://gitee.com/thedreamtree/wms</a></td>
+                        </tr>
+                        <tr>
+                            <td>主要特色</td>
+                            <td>开源 / 简洁 / 功能丰富 / 易上手 / 文档丰富 / 社区活跃</td>
+                        </tr>
+                        <tr>
+                            <td>获取源码</td>
+                            <td>
+                                <a href="https://gitee.com/thedreamtree/wms" target="_blank" class="layui-btn layui-btn-sm">前往官网</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header">前端框架</div>
+                <div class="layui-card-body">
+                    <table class="layui-table layui-text">
+                        <colgroup>
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>基础框架</td>
+                            <td><a href="https://www.layui.com/" target="_blank">layui v2.4.5</a></td>
+                        </tr>
+                        <tr>
+                            <td>基础框架</td>
+                            <td><a href="https://easyweb.vip/" target="_blank">easyweb v3.1.1</a></td>
+                        </tr>
+                        <tr>
+                            <td>树形框架</td>
+                            <td><a href="http://www.treejs.cn/v3/main.php#_zTreeInfo" target="_blank">zTree v3.5.28</a></td>
+                        </tr>
+                        <tr>
+                            <td>其他框架</td>
+                            <td>jQuery、layui周边框架</td>
+                        </tr>
+                        <tr>
+                            <td>主要特色</td>
+                            <td>易上手 / 简约 / 依赖少</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header">后台框架</div>
+                <div class="layui-card-body">
+                    <table class="layui-table layui-text">
+                        <colgroup>
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>核心框架</td>
+                            <td>Spring Boot</td>
+                        </tr>
+                        <tr>
+                            <td>视图渲染</td>
+                            <td>Spring MVC、<a href="http://ibeetl.com" target="_blank">Beetl</a></td>
+                        </tr>
+                        <tr>
+                            <td>持久层</td>
+                            <td>MyBatis、Druid、<a href="http://mp.baomidou.com" target="_blank">MyBatis-Plus</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>权限框架</td>
+                            <td>Shiro、JWT(API接口权限)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>数据库</td>
+                            <td>支持Mysql、Oracle、Postgre SQL、Sql Server</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js部分 -->
+@/* 加入contextPath属性和session超时的配置 */
+<script type="text/javascript">
+    var Feng = {
+        ctxPath: "${ctxPath}",
+        version: '${constants.getReleaseVersion()}'
+    };
+</script>
+
+<script type="text/javascript" src="${ctxPath}/assets/common/libs/layui/layui.js?v=${constants.getReleaseVersion()}"></script>
+<script type="text/javascript" src="${ctxPath}/assets/common/js/common.js?v=${constants.getReleaseVersion()}"></script>
+
+<script>
+    layui.use(['layer', 'carousel'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var carousel = layui.carousel;
+        var device = layui.device;
+
+        // 渲染轮播
+        carousel.render({
+            elem: '.layui-carousel',
+            width: '100%',
+            height: '60px',
+            arrow: 'none',
+            autoplay: true,
+            trigger: device.ios || device.android ? 'click' : 'hover',
+            anim: 'fade'
+        });
+    });
+</script>
+</body>
+
+</html>

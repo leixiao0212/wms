@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.instorage.mapper.ReceiveMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.instorage.entity.Receive">
+        <id column="id" property="id" />
+        <result column="receiveno" property="receiveno" />
+        <result column="purchaseid" property="purchaseid" />
+        <result column="purchaseno" property="purchaseno" />
+        <result column="allocationid" property="allocationid" />
+        <result column="allocationno" property="allocationno" />
+        <result column="state" property="state" />
+        <result column="remarks" property="remarks" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+        <result column="auditid" property="auditid" />
+        <result column="auditor" property="auditor" />
+        <result column="audittime" property="audittime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", receiveno AS "receiveno", purchaseid AS "purchaseid", purchaseno AS "purchaseno", allocationid AS "allocationid", allocationno AS "allocationno", state AS "state", remarks AS "remarks", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime", auditid AS "auditid", auditor AS "auditor", audittime AS "audittime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.instorage.model.result.ReceiveResult" parameterType="com.tdt.modular.instorage.model.params.ReceiveParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_receive where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from i_receive where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="paramCondition.receiveno != null and paramCondition.receiveno != ''">
+            and receiveno like CONCAT ('%',#{paramCondition.receiveno},'%')
+        </if>
+        <if test="paramCondition.purchaseno != null and paramCondition.purchaseno != ''">
+            and purchaseno like CONCAT ('%',#{paramCondition.purchaseno},'%')
+        </if>
+        <if test="paramCondition.allocationno != null and paramCondition.allocationno != ''">
+            and allocationno like CONCAT ('%',#{paramCondition.allocationno},'%')
+        </if>
+        <if test="paramCondition.state != null and paramCondition.state != ''">
+            and state = #{paramCondition.state}
+        </if>
+        order by createtime desc
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.instorage.model.result.ReceiveResult" parameterType="com.tdt.modular.instorage.model.params.ReceiveParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_receive where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.instorage.model.params.ReceiveParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_receive where 1 = 1
+    </select>
+
+    <delete id="deleteAll">
+        DELETE i_receive,i_receive_detail FROM i_receive LEFT JOIN i_receive_detail on i_receive.id = i_receive_detail.pid
+        WHERE i_receive.id = #{id}
+    </delete>
+</mapper>

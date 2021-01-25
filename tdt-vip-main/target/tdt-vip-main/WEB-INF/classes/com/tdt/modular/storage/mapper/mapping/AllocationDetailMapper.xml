@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.storage.mapper.AllocationDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.storage.entity.AllocationDetail">
+        <id column="id" property="id" />
+        <result column="pid" property="locatorid" />
+        <result column="locatorid" property="pid" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="qty" property="qty" />
+        <result column="lockstockid" property="lockstockid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", locatorid AS "locatorid", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", qty AS "qty", lockstockid AS "lockstockid", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.storage.model.result.AllocationDetailResult" parameterType="com.tdt.modular.storage.model.params.AllocationDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_allocation_detail where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from s_allocation_detail as a where a.pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.storage.model.result.AllocationDetailResult" parameterType="com.tdt.modular.storage.model.params.AllocationDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_allocation_detail where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.storage.model.params.AllocationDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_allocation_detail where 1 = 1
+    </select>
+
+    <select id="detailList" resultType="java.util.Map">
+        select a.* from s_allocation_detail a
+        where a.pid = #{allocationId}
+    </select>
+
+</mapper>

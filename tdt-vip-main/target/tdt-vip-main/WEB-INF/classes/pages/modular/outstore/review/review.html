@@ -1,0 +1,48 @@
+@layout("/common/_container.html",{js:["/assets/modular/outstore/review/review.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar" lay-filter="test">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="outorderno" class="layui-input" type="text" placeholder="出库订单编号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="state" name="state">
+                                    <option value="">出库复核状态</option>
+                                    @for(dict in dicts!){
+                                    <option value="${dict.code!}">${dict.name!}</option>
+                                    @}
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnReset" class="layui-btn icon-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="reviewTable" lay-filter="reviewTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    {{#  if(d.state == "3"||d.state == "4"){  }}
+    <a class="layui-btn layui-btn-xs" lay-event="checkDetail">查看明细</a>
+    {{#  } else {  }}
+    @if(shiro.hasPermission("/review/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+    <a class="layui-btn layui-btn-xs" lay-event="addDetail">录入明细</a>
+    {{#  }  }}
+</script>
+@}

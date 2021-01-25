@@ -1,0 +1,64 @@
+@layout("/common/_container.html",{js:["/assets/modular/instorage/purchase/purchase.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar" lay-filter="test">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="purchaseno" class="layui-input" type="text" placeholder="订单编号"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="suppliername" class="layui-input" type="text" placeholder="供应商"/>
+                            </div>
+                            <div class="layui-inline">
+                                <select id="state" name="state">
+                                    <option value="">审核状态</option>
+                                    @for(dict in dicts!){
+                                    <option value="${dict.code!}">${dict.name!}</option>
+                                    @}
+                                </select>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnReset" class="layui-btn icon-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                @if(shiro.hasPermission("/purchase/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>新增</button>
+                                @}
+                                @if(shiro.hasPermission("/purchase/review")){
+                                <button id="btnReview" class="layui-btn icon-btn"><i class="layui-icon">&#xe605;</i>审核</button>
+                                @}
+                                @if(shiro.hasPermission("/purchase/cancelReview")){
+                                <button id="btnCancelReview" class="layui-btn icon-btn"><i class="layui-icon">&#x1006;</i>撤销审核</button>
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="purchaseTable" lay-filter="purchaseTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="tableBar">
+    @if(shiro.hasPermission("/purchase/edit")){
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    @}
+    @if(shiro.hasPermission("/purchase/delete")){
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    @}
+     {{# if(d.state == "2"){  }}
+    <a class="layui-btn layui-btn-xs" lay-event="checkDetail">查看明细</a>
+    {{# }else{ }}
+    <a class="layui-btn layui-btn-xs" lay-event="addDetail">录入明细</a>
+    {{#}}}
+    <a class="layui-btn layui-btn-xs" lay-event="print">打印</a>
+</script>
+@}

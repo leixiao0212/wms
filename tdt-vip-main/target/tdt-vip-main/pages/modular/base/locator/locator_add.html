@@ -1,0 +1,84 @@
+@layout("/common/_form.html",{js:["/assets/modular/base/locator/locator_add.js"]}){
+
+<form class="layui-form" id="locatorForm" lay-filter="locatorForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">货位名称<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="name" name="name" placeholder="请输入货位名称" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">货位编码<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input id="code" name="code" placeholder="请输入货位编码" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">长</label>
+                        <div class="layui-input-inline">
+                            <input id="length" name="length" placeholder="请输入长" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">宽</label>
+                        <div class="layui-input-inline">
+                            <input id="width" name="width" placeholder="请输入宽" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">高</label>
+                        <div class="layui-input-inline">
+                            <input id="height" name="height" placeholder="请输入高" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">货位限重(kg)</label>
+                        <div class="layui-input-inline">
+                            <input id="weight" name="weight" placeholder="请输入货位限重" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">货位类型<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select id="type" name="type">
+                                @for(dict in dicts!){
+                                <option value="${dict.code!}">${dict.name!}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label" style="width: 100px">货位状态<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="state" value="0" title="正常" checked/>
+                            <input type="radio" name="state" value="1" title="失效"/>
+                        </div>
+                    </div>
+                    <!--<div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label" style="width: 100px">所属仓库<span style="color: red;">*</span></label>
+                        <div class="layui-input-inline">
+                            <select id="warehouseid" name="warehouseid">
+                                @for(warehouse in warehouses!){
+                                <option value="${warehouse.id!}">${warehouse.name!}</option>
+                                @}
+                            </select>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit><i class="layui-icon">&#xe605;</i>提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog"><i class="layui-icon">&#x1006;</i>取消</button>
+    </div>
+
+</form>
+
+@}

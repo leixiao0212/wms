@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.instorage.mapper.PurchaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.instorage.entity.Purchase">
+        <id column="id" property="id" />
+        <result column="purchaseno" property="purchaseno" />
+        <result column="supplierid" property="supplierid" />
+        <result column="suppliername" property="suppliername" />
+        <result column="commoditynum" property="commoditynum" />
+        <result column="estimatearrivaltime" property="estimatearrivaltime" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="warehousename" property="warehousename" />
+        <result column="state" property="state" />
+        <result column="remark" property="remark" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+        <result column="updateid" property="updateid" />
+        <result column="updator" property="updator" />
+        <result column="updatetime" property="updatetime" />
+        <result column="auditid" property="auditid" />
+        <result column="auditor" property="auditor" />
+        <result column="audittime" property="audittime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", purchaseno AS "purchaseno", supplierid AS "supplierid", suppliername AS "suppliername", commoditynum AS "commoditynum", estimatearrivaltime AS "estimatearrivaltime", warehouseid AS "warehouseid", warehousename AS "warehousename", state AS "state", remark AS "remark", createid AS "createid", creator AS "creator", createtime AS "createtime", updateid AS "updateid", updator AS "updator", updatetime AS "updatetime", auditid AS "auditid", auditor AS "auditor", audittime AS "audittime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.instorage.model.result.PurchaseResult" parameterType="com.tdt.modular.instorage.model.params.PurchaseParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_purchase where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from i_purchase where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="paramCondition.purchaseno != null and paramCondition.purchaseno != ''">
+            and purchaseno like CONCAT ('%',#{paramCondition.purchaseno},'%')
+        </if>
+        <if test="paramCondition.suppliername != null and paramCondition.suppliername != ''">
+            and suppliername like CONCAT ('%',#{paramCondition.suppliername},'%')
+        </if>
+        <if test="paramCondition.state != null and paramCondition.state != ''">
+            and state = #{state}
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.instorage.model.result.PurchaseResult" parameterType="com.tdt.modular.instorage.model.params.PurchaseParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_purchase where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.instorage.model.params.PurchaseParam">
+        select
+        <include refid="Base_Column_List"/>
+        from i_purchase where 1 = 1
+    </select>
+
+    <delete id="deleteAll">
+        DELETE i_purchase,i_purchase_detail FROM i_purchase LEFT JOIN i_purchase_detail on i_purchase.id = i_purchase_detail.pid
+        WHERE i_purchase.id = #{id}
+    </delete>
+</mapper>

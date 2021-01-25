@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.OutorderTagMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.OutorderTag">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="outorderno" property="outorderno" />
+        <result column="province" property="province" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="city" property="city" />
+        <result column="county" property="county" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", outorderno AS "outorderno", warehouseid AS "warehouseid", province AS "province", city AS "city", county AS "county", type AS "type"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.OutorderTagResult" parameterType="com.tdt.modular.outstore.model.params.OutorderTagParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_tag where 1 = 1
+            <if test="paramCondition.city != null and paramCondition.city != ''">
+                and city like CONCAT('%',#{paramCondition.city},'%')
+            </if>
+            <if test="paramCondition.county != null and paramCondition.county != ''">
+                and county like CONCAT('%',#{paramCondition.county},'%')
+            </if>
+            <if test="paramCondition.pid != null and paramCondition.pid != ''">
+                and pid like CONCAT('%',#{paramCondition.pid},'%')
+            </if>
+            <if test="paramCondition.province != null and paramCondition.province != ''">
+                and province like CONCAT('%',#{paramCondition.province},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.OutorderTagParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_tag where 1 = 1 and pid = #{paramCondition.pid}
+            <if test="paramCondition.city != null and paramCondition.city != ''">
+                and city = #{paramCondition.city}
+            </if>
+            <if test="paramCondition.county != null and paramCondition.county != ''">
+                and county = #{paramCondition.county}
+            </if>
+            <if test="paramCondition.province != null and paramCondition.province != ''">
+                and province = #{paramCondition.province}
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type = #{paramCondition.type}
+            </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.OutorderTagResult" parameterType="com.tdt.modular.outstore.model.params.OutorderTagParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_tag where 1 = 1
+            <if test="paramCondition.city != null and paramCondition.city != ''">
+                and city like CONCAT('%',#{paramCondition.city},'%')
+            </if>
+            <if test="paramCondition.county != null and paramCondition.county != ''">
+                and county like CONCAT('%',#{paramCondition.county},'%')
+            </if>
+            <if test="paramCondition.pid != null and paramCondition.pid != ''">
+                and pid like CONCAT('%',#{paramCondition.pid},'%')
+            </if>
+            <if test="paramCondition.province != null and paramCondition.province != ''">
+                and province like CONCAT('%',#{paramCondition.province},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.OutorderTagParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_outorder_tag where 1 = 1
+            <if test="paramCondition.city != null and paramCondition.city != ''">
+                and city like CONCAT('%',#{paramCondition.city},'%')
+            </if>
+            <if test="paramCondition.county != null and paramCondition.county != ''">
+                and county like CONCAT('%',#{paramCondition.county},'%')
+            </if>
+            <if test="paramCondition.pid != null and paramCondition.pid != ''">
+                and pid like CONCAT('%',#{paramCondition.pid},'%')
+            </if>
+            <if test="paramCondition.province != null and paramCondition.province != ''">
+                and province like CONCAT('%',#{paramCondition.province},'%')
+            </if>
+            <if test="paramCondition.type != null and paramCondition.type != ''">
+                and type like CONCAT('%',#{paramCondition.type},'%')
+            </if>
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM o_outorder_tag AS a WHERE EXISTS (select 1 from o_outorder where warehouseid = #{warehouseid} and id=a.pid) AND a.type = #{type}
+    </select>
+
+    <select id="groupList" resultType="map">
+        SELECT COUNT(1),FLOOR(COUNT(1)/#{qty}) As times,${sql} FROM o_outorder_tag
+        WHERE warehouseid = #{warehouseid}
+        <if test="type != null and type != ''">
+            And type = #{type}
+        </if>
+        GROUP BY ${sql} Having COUNT(1) >= #{qty}
+    </select>
+</mapper>

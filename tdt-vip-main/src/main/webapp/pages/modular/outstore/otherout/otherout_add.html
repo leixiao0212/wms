@@ -1,0 +1,42 @@
+@layout("/common/_form.html",{js:["/assets/modular/outstore/otherout/otherout_add.js"]}){
+
+<form class="layui-form" id="otheroutForm" lay-filter="otheroutForm" style="height:710px">
+    <div class="layui-fluid">
+        <div class="layui-card" style="height:710px">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body" style="margin-top: 160px">
+                <input type="hidden" id="id" name="id" value="">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <label class="layui-form-label" style="margin-left: 90px">库位编码<span style="color: red;">*</span></label>
+                    <div class="layui-input-inline" style="width: 250px;">
+                        <input id="locatorcode" name="locatorcode" placeholder="请输入出库库位" type="text" class="layui-input" lay-verify="required" required/>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <label class="layui-form-label" style="margin-left: 90px">商品编码<span style="color: red;">*</span></label>
+                    <div class="layui-input-inline" style="width: 250px;">
+                        <input id="commoditybar" name="commoditybar" placeholder="请输入出库商品" type="text" class="layui-input" lay-verify="required" required />
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <div class="layui-input-inline">&nbsp;</div>
+                    <label class="layui-form-label" style="margin-left: 90px">出库数量<span style="color: red;">*</span></label>
+                    <div class="layui-input-inline" style="width: 250px;">
+                        <input id="qty" name="qty" placeholder="请输入出库数量" type="text" class="layui-input" lay-verify="required" required />
+                    </div>
+                </div>
+                <div class="layui-form-item text-center">
+                    <button id="btnAdd" type="button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>出库</button>
+                    <button id="btnClean" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i>清除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@}

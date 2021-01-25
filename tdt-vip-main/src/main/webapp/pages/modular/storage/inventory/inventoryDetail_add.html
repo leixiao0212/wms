@@ -1,0 +1,62 @@
+@layout("/common/_form.html",{js:["/assets/modular/storage/inventory/inventoryDetail_add.js"]}){
+
+<form class="layui-form" id="inventoryLocatorDetailForm" lay-filter="inventoryLocatorDetailForm">
+    <div class="layui-form toolbar">
+        <input type="hidden" id="inventoryId" name="inventoryId" value="${id}">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">&nbsp;</div>
+            <label class="layui-form-label">盘点单号<span style="color: red;">*</span></label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input id="inventoryno" name="inventoryno" value="${inventoryno}" placeholder="请输入盘点单号" type="text" class="layui-input"  readonly/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">&nbsp;</div>
+            <label class="layui-form-label">货位编码<span style="color: red;">*</span></label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input id="locatorcode" name="locatorcode" placeholder="请输入货位编码" type="text" class="layui-input" lay-verify="required" required/>
+            </div>
+            <div class="layui-input-inline" style="padding-left: 10px">
+                <input type="checkbox" lay-filter="lock1" id="lock1" title="锁定">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">&nbsp;</div>
+            <label class="layui-form-label">商品编码<span style="color: red;">*</span></label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input id="commoditybar" name="commoditybar" placeholder="请输入商品编码" type="text" class="layui-input" lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-inline">&nbsp;</div>
+            <label class="layui-form-label">数量<span style="color: red;">*</span></label>
+            <div class="layui-input-inline" style="width: 250px;">
+                <input id="qty" name="qty" placeholder="请输入数量" type="text" class="layui-input" lay-verify="required" required/>
+            </div>
+            <div class="layui-input-inline" style="padding-left: 10px">
+                <input type="checkbox" lay-filter="lock2" id="lock2" title="锁定">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item text-center">
+        <button id="btnAdd" type="button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>盘点</button>
+        <button id="btnClean" class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe640;</i>清除</button>
+    </div>
+    <div class="layui-form-item text-center">
+        <button id="btnFinish" type="button" class="layui-btn layui-btn-warm layui-btn-radius"><i class="layui-icon">&#xe605;</i>盘点结束</button>
+    </div>
+</form>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-table" id="inventoryDetailTable" lay-filter="inventoryDetailTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@}

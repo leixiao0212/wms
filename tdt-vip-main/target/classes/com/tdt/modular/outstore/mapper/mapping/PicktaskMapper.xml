@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.outstore.mapper.PicktaskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.outstore.entity.Picktask">
+        <id column="id" property="id" />
+        <result column="picktaskno" property="picktaskno" />
+        <result column="receiverid" property="receiverid" />
+        <result column="receiver" property="receiver" />
+        <result column="receivetime" property="receivetime" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", picktaskno AS "picktaskno", receiverid AS "receiverid", receiver AS "receiver", receivetime AS "receivetime", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.outstore.model.result.PicktaskResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask where 1 = 1 and warehouseid = #{paramCondition.warehouseid}
+        <if test="outorderno != null and outorderno != ''">
+            and id = (select pid from o_picktask_outorder where outorderno = #{outorderno})
+        </if>
+        <if test="isReceive != null and isReceive != '' and isReceive == 1">
+            and receiver is not null
+        </if>
+        <if test="isReceive != null and isReceive != '' and isReceive == 0">
+            and receiver is null
+        </if>
+        <if test="paramCondition.receiver != null and paramCondition.receiver != ''">
+            and receiver like CONCAT('%',#{paramCondition.receiver},'%')
+        </if>
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.outstore.model.result.PicktaskResult" parameterType="com.tdt.modular.outstore.model.params.PicktaskParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.outstore.model.params.PicktaskParam">
+        select
+        <include refid="Base_Column_List"/>
+        from o_picktask where 1 = 1
+    </select>
+
+    <update id="updateSetNull" parameterType="long">
+        UPDATE o_picktask SET receiverid=NULL,receiver=NULL,receivetime=NULL WHERE id = #{picktaskid}
+    </update>
+</mapper>

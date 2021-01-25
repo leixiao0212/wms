@@ -1,0 +1,41 @@
+@layout("/common/_form.html",{js:["/assets/modular/storage/inventory/inventory_report.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">盘点明细信息</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-header">盘点明细</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item text-center">
+                        <h1 style="color: red">盘点的运单</h1>
+                    </div>
+                    <table class="layui-table" id="inventoryDetailTable" lay-filter="inventoryDetailTable"></table>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">盘盈</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item text-center">
+                        <h1 style="color: red">盘盈的商品</h1>
+                    </div>
+                    <table class="layui-table" id="inventoryProfitTable" lay-filter="inventoryProfitTable"></table>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">盘亏</div>
+                <div class="layui-card-body">
+                    <div class="layui-form-item text-center">
+                        <h1 style="color: red">盘亏的商品</h1>
+                    </div>
+                    <table class="layui-table" id="inventoryLossTable" lay-filter="inventoryLossTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@}

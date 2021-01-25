@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.storage.mapper.InventoryLocatorDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.storage.entity.InventoryLocatorDetail">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="locatorid" property="locatorid" />
+        <result column="locatorcode" property="locatorcode" />
+        <result column="locatorname" property="locatorname" />
+        <result column="commodityid" property="commodityid" />
+        <result column="commoditybar" property="commoditybar" />
+        <result column="commodityname" property="commodityname" />
+        <result column="qty" property="qty" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", pid AS "pid", locatorid AS "locatorid", locatorcode AS "locatorcode", locatorname AS "locatorname", commodityid AS "commodityid", commoditybar AS "commoditybar", commodityname AS "commodityname", qty AS "qty", createid AS "createid", creator AS "creator", createtime AS "createtime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.storage.model.result.InventoryLocatorDetailResult" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator_detail where 1 = 1
+    </select>
+
+    <select id="customMapList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator_detail where 1 = 1 and pid = #{paramCondition.pid}
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.storage.model.result.InventoryLocatorDetailResult" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator_detail where 1 = 1
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.storage.model.params.InventoryLocatorDetailParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory_locator_detail where 1 = 1
+    </select>
+
+</mapper>

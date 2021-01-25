@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdt.modular.storage.mapper.InventoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tdt.modular.storage.entity.Inventory">
+        <id column="id" property="id" />
+        <result column="inventoryno" property="inventoryno" />
+        <result column="state" property="state" />
+        <result column="warehouseid" property="warehouseid" />
+        <result column="createid" property="createid" />
+        <result column="creator" property="creator" />
+        <result column="createtime" property="createtime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id AS "id", inventoryno AS "inventoryno", state AS "state", warehouseid AS "warehouseid", createid AS "createid", creator AS "creator", createtime AS "createtime"
+    </sql>
+
+
+    <select id="customList" resultType="com.tdt.modular.storage.model.result.InventoryResult" parameterType="com.tdt.modular.storage.model.params.InventoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="customMapList" resultType="map" parameterType="com.tdt.modular.storage.model.params.InventoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="customPageList" resultType="com.tdt.modular.storage.model.result.InventoryResult" parameterType="com.tdt.modular.storage.model.params.InventoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="customPageMapList" resultType="map" parameterType="com.tdt.modular.storage.model.params.InventoryParam">
+        select
+        <include refid="Base_Column_List"/>
+        from s_inventory where 1 = 1 order by createtime desc
+    </select>
+
+    <select id="inventoryProfitList" resultType="java.util.Map">
+        select * from (
+        select (a.qty-IFNULL(b.qty,0)) as qty,a.locatorcode,a.locatorname,a.commoditybar,a.commodityname,a.createtime,a.creator from s_inventory_locator_detail a
+        left join s_inventory_locator_init b on a.pid = b.pid and a.commoditybar = b.commoditybar
+        where a.pid in (select id from s_inventory_locator where pid = #{pid})
+        ) a where a.qty > 0 order by a.createtime desc
+    </select>
+    <select id="inventoryLossList" resultType="java.util.Map">
+        select * from (
+        select (a.qty-IFNULL(b.qty,0)) as qty,a.locatorcode,a.locatorname,a.commoditybar,a.commodityname,a.createtime,a.creator from s_inventory_locator_init a
+        left join s_inventory_locator_detail b on a.pid = b.pid and a.commoditybar = b.commoditybar
+        where a.pid in (select id from s_inventory_locator where pid = #{pid})
+        ) a where a.qty > 0 order by a.createtime desc
+    </select>
+
+</mapper>

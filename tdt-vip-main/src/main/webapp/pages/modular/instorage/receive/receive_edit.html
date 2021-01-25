@@ -1,0 +1,39 @@
+@layout("/common/_form.html",{js:["/assets/modular/instorage/receive/receive_edit.js"]}){
+
+<form class="layui-form" id="receiveForm" lay-filter="receiveForm">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+        <div class="layui-card">
+            <div class="layui-card-header">基本信息</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <input name="id" type="hidden"/>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">接货单号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="receiveno" name="receiveno" placeholder="请输入接货单号" type="text" class="layui-input" lay-verify="required" required disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">采购单号<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="purchaseno" name="purchaseno" placeholder="请输入采购单号" type="text" class="layui-input" lay-verify="required" required disabled/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注<span style="color: red;">*</span></label>
+                        <div class="layui-input-block">
+                            <input id="remarks" name="remarks" placeholder="请输入备注" type="text" class="layui-input" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group-bottom text-center">
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>&emsp;提交&emsp;</button>
+        <button type="reset" class="layui-btn layui-btn-primary" ew-event="closeDialog">&emsp;取消&emsp;</button>
+    </div>
+
+</form>
+
+@}

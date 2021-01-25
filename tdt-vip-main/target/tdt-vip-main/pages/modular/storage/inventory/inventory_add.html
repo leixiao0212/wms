@@ -1,0 +1,41 @@
+@layout("/common/_container.html",{js:["/assets/modular/storage/inventory/inventory_add.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">盘点</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm12 layui-col-md12 layui-col-lg12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <input id="code" class="layui-input" type="text" placeholder="货位编码"/>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="name" class="layui-input" type="text" placeholder="货位名称"/>
+                            </div>
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="btnReset" class="layui-btn icon-btn"><i class="layui-icon">&#xe669;</i>重置</button>
+                                @if(shiro.hasPermission("/inventory/locator")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>盘点</button>
+                                <button id="btnAddAll" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>盘点全部货位</button>
+                                @}
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block" style="margin-left: 0px">
+                                <input id="selected" class="layui-input" type="text" placeholder="已选盘点货位" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="inventoryLocatorDetailTable" lay-filter="inventoryLocatorDetailTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@}
